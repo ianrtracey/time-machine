@@ -10,15 +10,15 @@
 	<div class="container">
 		<section class="texts">
 			<% @conversation.messages.each do |message| %>
-				<% if message.content.split(":").first == "I" %>
+				<% if message.sender == "Ian" %>
 					<div class="from-them">
-						<p><%= message.content.split(":").last %></p>
+						<p><%= message.content %></p>
 					</div>
 					<div class="clear">
 					</div>
 				<% else %>
 					<div class="from-me">
-						<p><%= message.content.split(":").last %></p>
+						<p><%= message.content %></p>
 					</div>
 					<div class="clear">
 					</div>

@@ -53,20 +53,36 @@ set :public, 'public'
   end
 
   post "/new/conversation" do 
+    date = params[:data].split("\n")[0].split("]",2)[0].split(" ",2)[0].gsub("/", "-")
+    date[0] = ""
     clean = sanitize(params[:data])
-    puts clean
+    puts "Date: #{date}"
+    conversation = Conversation.create(date: date)
+    clean.each do |clean_line|
+      sender = ""
+      content = ""
+      if clean_line.split(":", 2).first.include? "I"
+        sender = "Ian"
+      else
+        sender = "Savannah"
+      end
+      content = clean_line.split(":", 2).last.strip
+    conversation.messages << Message.new(sender: sender ,content: content)
+    end
+    puts "Success! Find the conversation at localhost:9292/conversation/#{conversation.date}"
   end
 
   def sanitize(data)
+    result = []
     s = data.split("\n")
       s.each do |d|
         atom = d.split(":", 3)
         if atom[1].include? "Savannah"
-          puts "S: "+atom[2].strip
+          result << "S: "+atom[2].strip
         else
-          puts "I: " +atom[2].strip}
+          result << "I: " +atom[2].strip
         end
       end
-  end
+    return result
 end
 
