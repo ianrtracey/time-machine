@@ -1,0 +1,10 @@
+This is the index
+<ul>
+<% @conversations.each do |c| %>
+	<ul><strong><%= c.date %></strong>
+		<% c.messages.each do |m| %>
+		<li><%= m.content %></li>
+		<% end %>
+	</ul>
+<% end %>
+</ul>

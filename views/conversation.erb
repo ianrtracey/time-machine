@@ -1,0 +1,30 @@
+<html>
+<head>
+	<link href="/stylesheets/style.css" rel="stylesheet" type='text/css' />
+</head>
+
+<body>
+
+<img src="/images/banner.png" class="banner" />
+<%= @conversation.date %>
+	<div class="container">
+		<section class="texts">
+			<% @conversation.messages.each do |message| %>
+				<% if message.content.split(":").first == "I" %>
+					<div class="from-them">
+						<p><%= message.content.split(":").last %></p>
+					</div>
+					<div class="clear">
+					</div>
+				<% else %>
+					<div class="from-me">
+						<p><%= message.content.split(":").last %></p>
+					</div>
+					<div class="clear">
+					</div>
+				<% end %>
+			<% end %>
+		</section>
+	</div>
+</body>
+</html>
