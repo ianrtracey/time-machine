@@ -1,10 +1,6 @@
 This is the index
 <ul>
-<% @conversations.each do |c| %>
-	<ul><strong><%= c.date %></strong>
-		<% c.messages.each do |m| %>
-		<li><%= m.content %></li>
-		<% end %>
-	</ul>
+<% @conversations.sort.each do |c| %>
+	<li><a href=<%= "/conversation/#{c.date}" %>><%= c.date %></a></li>
 <% end %>
 </ul>
