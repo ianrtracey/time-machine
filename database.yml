@@ -4,10 +4,19 @@ development:
       database: mongoid
       hosts:
         - localhost:27017
+  options:
+
+test:
+  sessions:
+    default:
+      database: test
+      hosts:
+        - localhost
+
 production:
- sessions:
-   default:
-     uri: <%= ENV['MONGOHQ_URI'] %>
-     options:
-       skip_version_check: true
-       safe:true
+  sessions:
+    default:
+      uri: <%= ENV['MONGOLAB_URI'] %>
+      options:
+        skip_version_check: true
+        safe: true
