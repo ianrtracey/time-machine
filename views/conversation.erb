@@ -6,7 +6,9 @@
 <body>
 
 <img src="/images/banner.png" class="banner" />
+<div class="date">
 <%= @date %>
+</div>
 	<div class="container">
 		<section class="texts">
 			<% @conversation.messages.each do |message| %>

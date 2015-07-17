@@ -179,4 +179,11 @@ body {
 	padding: 0px 10px 0px 10px;
 }
 
+.date {
+  margin: auto;
+  width: 45%;
+  color: black;
+  z-index: 1.0;
+}
+
 
