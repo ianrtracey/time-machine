@@ -9,9 +9,9 @@ require 'date'
 #This now looks at our Gemfile and requires all of those gems for us
 Bundler.require(:default) 
 #note it dosn't want the .rb extension. It knows it wants a .rb
-require './Conversation'
-require './Message'
-require './Cleaner'
+require './Conversation.rb'
+require './Message.rb'
+require './Cleaner.rb'
 
 
 
