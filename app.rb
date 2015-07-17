@@ -5,12 +5,15 @@
 require 'rubygems'
 require 'bundler'
 require 'yaml'
+require 'date'
 #This now looks at our Gemfile and requires all of those gems for us
 Bundler.require(:default) 
 #note it dosn't want the .rb extension. It knows it wants a .rb
 require './Conversation'
 require './Message'
-require './cleaner'
+require './Cleaner'
+
+
 
 set :public, 'public'
   configure do
@@ -28,12 +31,6 @@ set :public, 'public'
     CatFact.all.pluck(:fact).sample(params[:num].to_i).to_json
   end
 
-  get "/conversations/:num" do |n|
-  	c = Conversation.create(date: "July-18-2014")
-  	m = Message.new(content: "Dates would be cool")
-  	c.messages << m
-  end
-
   get "/conv" do
    puts Conversation.all.pluck(:messages)
   end
@@ -45,10 +42,13 @@ set :public, 'public'
 
   get "/conversation/:date" do |date|
     @conversation = Conversation.find_by(date: date.capitalize)
+    date = Date.strptime(@conversation.date, '%m-%d-%y')
+    @date = "#{Date::MONTHNAMES[date.month]} #{date.day}, #{date.year}"
     erb :conversation
   end
 
   get "/new/conversation" do 
+    protected!
     erb :new_conversation
   end
 
@@ -84,5 +84,18 @@ set :public, 'public'
         end
       end
     return result
-end
+  end
+
+  def authorized?
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
+    @auth.provided? && @auth.basic? && @auth.credentials & @auth.credentials == ["ianrtracey", "ianandsav"]
+  end
+
+  def protected!
+    unless authorized?
+      response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+      throw(:halt, [401, "Oops... we need your login name & password\n"])
+    end
+  end
+
 
