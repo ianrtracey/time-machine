@@ -7,9 +7,9 @@ require 'bundler'
 require 'yaml'
 #This now looks at our Gemfile and requires all of those gems for us
 Bundler.require(:default) 
-#note it doesn't want the .rb extension. It knows it wants a .rb
-require './conversation'
-require './message'
+#note it dosn't want the .rb extension. It knows it wants a .rb
+require './Conversation'
+require './Message'
 require './cleaner'
 
 set :public, 'public'
