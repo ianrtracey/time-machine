@@ -11,7 +11,6 @@ Bundler.require(:default)
 #note it dosn't want the .rb extension. It knows it wants a .rb
 require './conversation.rb'
 require './message.rb'
-require './cleaner.rb'
 
 
 

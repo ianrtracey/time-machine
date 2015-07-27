@@ -1,3 +1,4 @@
+#
 class Message
   include Mongoid::Document
 
