@@ -20,6 +20,7 @@ set :public_folder, 'public'
      Mongoid.load!("./database.yml", :production)
     else
      Mongoid.load!("./database.yml", :development)
+    end
   end
 
 
