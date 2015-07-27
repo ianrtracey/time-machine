@@ -1,7 +1,4 @@
 require './app'
-require './conversation.rb'
-require './message.rb'
-require './cleaner.rb'
 run Sinatra::Application
 
 
