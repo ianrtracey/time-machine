@@ -16,9 +16,11 @@ require './message.rb'
 
 set :public_folder, 'public'
   configure do
-    if ENV == "production"
+    if ENV['RACK_ENV'] == "production"
+     puts "configuring db for production mode"
      Mongoid.load!("./database.yml", :production)
     else
+     puts "configuring db for development mode"
      Mongoid.load!("./database.yml", :development)
     end
   end
