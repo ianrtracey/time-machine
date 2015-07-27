@@ -21,7 +21,7 @@ set :public_folder, 'public'
 
 
   get '/' do
-   "Hello, this is CatFacts."
+   "Welcome to time machine."
   end
   
   get "/random_cat_fact/?:num?" do
