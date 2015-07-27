@@ -15,7 +15,6 @@ require './cleaner.rb'
 
 
 
-
 set :public_folder, 'public'
   configure do
      Mongoid.load!("./database.yml", :development)
