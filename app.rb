@@ -16,6 +16,9 @@ require './message.rb'
 
 set :public_folder, 'public'
   configure do
+    if ENV == "production"
+     Mongoid.load!("./database.yml", :production)
+    else
      Mongoid.load!("./database.yml", :development)
   end
 
