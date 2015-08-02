@@ -5,7 +5,7 @@ body {
 }
 
 section {
-  max-width: 450px;
+  max-width: 320px;
   margin: 50px auto;
 }
 section div {
@@ -170,9 +170,9 @@ body {
   vertical-align: middle;
 }
 .banner {
-	max-width: 110%;
+	max-width: 100%;
 	height: auto;
-	margin: -15px -15px -5px -15px;
+	margin: 0px -15px 0px 0px;
 	-webkit-mask-image: -webkit-gradient(linear, left 75%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))
 }
 .texts {
@@ -180,9 +180,8 @@ body {
 }
 
 .date {
-  margin: auto;
-  width: 45%;
-  color: black;
+  margin-top: -45px;
+  color: white;
   z-index: 1.0;
 }
 
