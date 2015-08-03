@@ -41,6 +41,10 @@ set :public_folder, 'public'
       from: "6235006454",
       to: "6238662766",
       body: "Hey Ian, you have a new timemachine flashback: https://ian-and-sav-time-machine.herokuapp.com/#{url}")
+      @client.messages.create(
+      from: "6235006454",
+      to: "6027089125",
+      body: "Hey Savannah, you have a new timemachine flashback: https://ian-and-sav-time-machine.herokuapp.com/#{url}")
       puts "message sent: #{url}"
       else
         puts "no more conversations left to send"
@@ -141,7 +145,7 @@ set :public_folder, 'public'
       return 'nil'
     else
       c.update_attributes(is_sent?: true)
-      return "conversations/#{c.date}"
+      return "conversation/#{c.date}"
     end
   end
 
