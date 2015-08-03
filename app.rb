@@ -1,7 +1,7 @@
 #This is the app.rb file. It is kind of like our bread and butter file.
 #In sinatra we can do almost anything from this file though we generally parition
 #things like configuration, databases and html/css/js stuff in other folders to keep this clean
-
+# edited
 require 'rubygems'
 require 'bundler'
 require 'yaml'
