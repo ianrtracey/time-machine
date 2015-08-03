@@ -6,11 +6,18 @@ require 'rubygems'
 require 'bundler'
 require 'yaml'
 require 'date'
+require 'twilio-ruby'
+require 'rufus/scheduler'
 #This now looks at our Gemfile and requires all of those gems for us
 Bundler.require(:default) 
 #note it dosn't want the .rb extension. It knows it wants a .rb
 require './conversation.rb'
 require './message.rb'
+require './sender.rb'
+
+
+
+
 
 
 
@@ -23,6 +30,24 @@ set :public_folder, 'public'
      puts "configuring db for development mode"
      Mongoid.load!("./database.yml", :development)
     end
+    ACCOUNT_SID = 'AC955cb60855da35fcec4d03be5c4b2a3f'
+    AUTH_TOKEN = 'fbd863919c6ed0dc51686e05845916f4' 
+    @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+    scheduler = Rufus::Scheduler.new
+    scheduler.every '1m' do
+      url = next_conversation_url
+      if url != 'nil'
+      @client.messages.create(
+      from: "6235006454",
+      to: "6238662766",
+      body: "Hey Ian, you have a new timemachine flashback: https://ian-and-sav-time-machine.herokuapp.com/#{url}")
+      )
+      puts "message sent: #{url}"
+      else
+        puts "no more conversations left to send"
+      end
+    end
+
   end
 
 
@@ -55,6 +80,14 @@ set :public_folder, 'public'
   get "/new/conversation" do 
     protected!
     erb :new_conversation
+  end
+
+  get "/send/message" do
+    @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
+    @client.messages.create(
+      from: "6235006454",
+      to: "6238662766",
+      body: "hey!")
   end
 
   post "/new/conversation" do 
@@ -102,5 +135,16 @@ set :public_folder, 'public'
       throw(:halt, [401, "Oops... we need your login name & password\n"])
     end
   end
+
+  def next_conversation_url
+    c = Conversation.where(:is_sent? => false).first
+    if c.nil?
+      return 'nil'
+    else
+      c.update_attributes(is_sent?: true)
+      return "conversations/#{c.date}"
+    end
+  end
+
 
 
