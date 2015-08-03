@@ -34,7 +34,7 @@ set :public_folder, 'public'
     AUTH_TOKEN = 'fbd863919c6ed0dc51686e05845916f4' 
     @client = Twilio::REST::Client.new ACCOUNT_SID, AUTH_TOKEN
     scheduler = Rufus::Scheduler.new
-    scheduler.every '6h' do
+    scheduler.every '4h' do
       url = next_conversation_url
       if url != 'nil'
       @client.messages.create(
